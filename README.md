@@ -112,6 +112,7 @@ handle it from there. :smile:
 * Tree
   * [Binary search tree](cpp/include/data_structure/tree/binary_search_tree.hpp) :white_check_mark:
   * [Fenwick tree](cpp/include/data_structure/tree/fenwick_tree.hpp) :white_check_mark:
+  * [Segment Tree](cpp/include/data_structure/tree/segment_tree.hpp) :white_check_mark:
 
 ## Compiling
 
