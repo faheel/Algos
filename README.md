@@ -115,25 +115,22 @@ handle it from there. :smile:
 
 ## Compiling
 
-To compile the source files, run **`make`** from the `C++` directory. Doing so will create executable binaries in the `bin` directory.
+Test / demo applications are provided for each algorithm. To compile:
 
-To compile and run all tests, run **`make test`**. This will compile all the tests (in the same way as described above) and will run them, displaying the results. 
+ - navigate to the cpp directory
+ - initialize cmake with **`cmake --B build`**
+ - compile with **`cmake --build build`**
+ - run the tests with **`cmake --build build -t test`**. On windows **`cd build;ctest . -C Debug`**
 
-In order to run a specific test and see its results, run it manually from the `bin` directory after calling `make`. For example, this command (executed from `bin`) would run only the unit tests for the N Queens algorithm:
+ In order to run a specific test and see its results, run it manually from the `bin`. For example, this command (executed from `bin`) would run only the unit tests for the N Queens algorithm:
 
 ```
 $ ./n_queens
 ```
 
-To remove all of the files created during compilation, run **`make clean`**. You need not do this every time you make some changes to a file and want to recompile it. Just run **`make`** and it will re-compile just those files whose contents have changed.
+To remove all of the files created during compilation, run **`cmake --build build -t clean`**. You need not do this every time you make some changes to a file and want to recompile it. Just run **`cmake --build build`** and it will re-compile just those files whose contents have changed.
 
-To see what happens in the background during compilation and testing, see the following files:
-
-- [Makefile](cpp/Makefile)
-- [CMakeLists.txt](cpp/CMakeLists.txt)
-- [Testing script](cpp/scripts/run_tests.sh)
-
-For more information on `make`, see the [GNU make Manual](https://www.gnu.org/software/make/manual/make.html). For more information on `CMake`, see the [CMake Tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html).
+information on `CMake`, see the [CMake Tutorial](https://cmake.org/cmake/help/latest/guide/tutorial/index.html).
 
 ## Maintainers
 
