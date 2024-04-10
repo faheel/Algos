@@ -85,12 +85,17 @@ int max_in_vector(const vector<int>& values) {
 */
 void radix_sort_internal(vector<int>& values, const int mult_factor, const int add_factor,
                          const bool to_show_state = false) {
+
+    
+
+
+
     int max_value = max_in_vector(values);
 
     // On each iteration of the following loop, extractor helps in getting the
     // next significant digit, which is (value / extractor) mod 10
     for (int extractor = 1; max_value / extractor > 0; extractor *= 10) {
-        count_sort(values, extractor, to_show_state, mult_factor, add_factor);
+        count_sort(values, extractor, mult_factor, add_factor, to_show_state);
     }
 }
 
@@ -104,7 +109,57 @@ void radix_sort(vector<int>& values, const int order = 1, const bool to_show_sta
         add_factor = 9;
     }
 
-    radix_sort_internal(values, mult_factor, add_factor, to_show_state);
+    // core radix sort only works on positive values
+    auto negs = std::any_of(values.begin(), values.end(), [](int v) {return v < 0; });
+
+    if (negs) {
+        // we have negative values so
+        // - split into neg and pos
+        // - sort each half
+        // - join together
+        auto negcount = std::count_if(values.begin(), values.end(), [](int v) {return v < 0; });
+
+        vector<int> pos;
+        vector<int> neg;
+
+        pos.reserve(values.size() - negcount);
+        neg.reserve(negcount);
+         
+        // split
+        for (auto v : values) {
+            if (v < 0)
+                neg.push_back(-v);
+            else
+                pos.push_back(v);
+        }
+        
+        // sort each half
+        radix_sort(neg, -order, to_show_state);
+        radix_sort(pos, order, to_show_state);
+
+        values.clear();
+        
+        // join
+        if (order == 1) {
+            for (auto v : neg) {
+                values.push_back(-v);
+            }
+            for (auto v : pos) {
+                values.push_back(v);
+            }
+        }
+        else {
+            for (auto v : pos) {
+                values.push_back(v);
+            }
+            for (auto v : neg) {
+                values.push_back(-v);
+            }
+        }
+    }
+    else {
+        radix_sort_internal(values, mult_factor, add_factor, to_show_state);
+    }
 }
 
 #endif // RADIX_SORT_HPP
