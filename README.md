@@ -81,7 +81,7 @@ handle it from there. :smile:
   * [Insertion sort](cpp/include/algorithm/sorting/insertion_sort.hpp) :white_check_mark:
   * [Merge sort](cpp/include/algorithm/sorting/merge_sort.hpp) :white_check_mark:
   * [Quick sort](cpp/include/algorithm/sorting/quick_sort.hpp) :white_check_mark:
-  * [Radix sort](cpp/include/algorithm/sorting/radix_sort.hpp)
+  * [Radix sort](cpp/include/algorithm/sorting/radix_sort.hpp) :white_check_mark:
   * [Selection sort](cpp/include/algorithm/sorting/selection_sort.hpp) :white_check_mark:
   * [Shell sort](cpp/include/algorithm/sorting/shell_sort.hpp) :white_check_mark:
 

@@ -15,7 +15,7 @@
 
 // Prototypes
 int generate_random_int(int, int);
-vector<int> generate_unsorted_vector(int max_size = 1000);
+vector<int> generate_unsorted_vector(const bool is_unsigned = false, int max_size = 1000);
 
 // Pointer to function
 using sorting_function = void(*)(vector<int>&, int, bool);
@@ -52,6 +52,14 @@ TEST_CASE("Sort in ascending order", "[sorting]") {
             REQUIRE(algo_sorted == std_sorted);
             algo_sorted = original;
         }
+
+        // radix sort special case, since curr impl supports only unsigned
+        original = algo_sorted = std_sorted = generate_unsorted_vector(true);
+        std::sort(std_sorted.begin(), std_sorted.end());
+
+        // Run tests
+        radix_sort(algo_sorted, 1, false);
+        REQUIRE(algo_sorted == std_sorted);
     }
 }
 
@@ -84,6 +92,14 @@ TEST_CASE("Sort in descending order", "[sorting]") {
             REQUIRE(algo_sorted == std_sorted);
             algo_sorted = original;
         }
+
+        // radix sort special case, since curr impl supports only unsigned
+        original = algo_sorted = std_sorted = generate_unsorted_vector(true);
+        std::sort(std_sorted.rbegin(), std_sorted.rend());
+
+        // Run tests
+        radix_sort(algo_sorted, -1, false);
+        REQUIRE(algo_sorted == std_sorted);
     }
 }
 
@@ -93,13 +109,26 @@ TEST_CASE("Sort in descending order", "[sorting]") {
     Creates a vector of random size and populates it with random integers.
      Default for max_size is set in function declaration.
 */
-vector<int> generate_unsorted_vector(int max_size) {
+vector<int> generate_unsorted_vector(const bool is_unsigned, int max_size) {
     vector<int> v;
     auto vector_size = (size_t) generate_random_int(1, max_size);
     v.reserve(vector_size);
 
+    int min, max;
+
+    if (is_unsigned)
+    {
+        min = std::numeric_limits<unsigned short>::min();
+        max = std::numeric_limits<unsigned short>::max();
+    }
+    else
+    {
+        min = std::numeric_limits<short>::min();
+        max = std::numeric_limits<short>::max();
+    }
+
     for (int i = 0; i < (int) vector_size; i++) {
-        v.push_back(generate_random_int(std::numeric_limits<short>::min(), std::numeric_limits<short>::max()));
+        v.push_back(generate_random_int(min, max));
     }
     return v;
 }

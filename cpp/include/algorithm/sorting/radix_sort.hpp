@@ -90,7 +90,7 @@ void radix_sort_internal(vector<int>& values, const int mult_factor, const int a
     // On each iteration of the following loop, extractor helps in getting the
     // next significant digit, which is (value / extractor) mod 10
     for (int extractor = 1; max_value / extractor > 0; extractor *= 10) {
-        count_sort(values, extractor, to_show_state, mult_factor, add_factor);
+        count_sort(values, extractor, mult_factor, add_factor, to_show_state);
     }
 }
 
