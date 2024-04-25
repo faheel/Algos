@@ -28,6 +28,12 @@ add_executable(n_queens
         test/algorithm/backtracking/n_queens.cpp)
 target_link_libraries(n_queens test_runner)
 
+# Knight's Tour
+add_executable(knights_tour
+        test/algorithm/backtracking/knights_tour.cpp)
+target_link_libraries(knights_tour test_runner)
+
+
 # -------------------
 # Dynamic programming
 # -------------------
@@ -225,4 +231,9 @@ target_link_libraries(binary_search_tree test_runner)
 add_executable(fenwick_tree
         test/data_structure/tree/fenwick_tree.cpp)
 target_link_libraries(fenwick_tree test_runner)
+
+# AVL tree
+add_executable(avl_tree
+        test/data_structure/tree/avl_tree.cpp)
+target_link_libraries(avl_tree test_runner)
 
